@@ -5,8 +5,18 @@ export class KeywordSearcher {
    * @param text The text to look in
    * @returns The score, calculated after the function in the subject
    */
-  static getScore(keywords: string[], text: string): number {
-    return 0;
+  getScore(keywords: string[], text: string): number {
+    let keywordFound = 0;
+    let occurences = 0;
+    keywords.forEach((keyword) => {
+      const occurencesOfKeyword = this.getOccurencesOfAKeyword(keyword, text);
+      if (occurencesOfKeyword > 0) {
+        console.log(occurences);
+        keywordFound += 1;
+        occurences += occurencesOfKeyword;
+      }
+    });
+    return this.calculateScore(keywordFound, keywords.length, occurences);
   }
 
   /**
