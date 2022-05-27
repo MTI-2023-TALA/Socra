@@ -16,7 +16,7 @@ npm ci
 
 To enable the database you can use
 ```
-docker compose up -d db
+docker compose up -d mongo
 ```
 
 ## Run the program
