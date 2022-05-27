@@ -1,15 +1,17 @@
 import { Request, Response } from 'express';
 
-import { parcoursCollection } from '../mongo';
+import { ParcoursService } from './parcours.service';
 
 export class ParcoursController {
+  constructor(private readonly parcoursService: ParcoursService) {}
+
   public async getAllParcours(req: Request, res: Response): Promise<void> {
-    const parcours = await parcoursCollection.find({}).toArray();
+    const parcours = await this.parcoursService.getAllParcours();
     res.send(parcours);
   }
 
-  public async AddParcours(req: Request, res: Response): Promise<void> {
-    const insertResult = await parcoursCollection.insertOne(req.body);
+  public async addParcours(req: Request, res: Response): Promise<void> {
+    const insertResult = await this.parcoursService.addParcours(req.body);
     res.send(insertResult);
   }
 }
