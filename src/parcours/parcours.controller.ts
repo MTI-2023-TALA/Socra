@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 
+import { ParcoursControllerInterface } from './interfaces/parcours.controller.interface';
 import { ParcoursService } from './parcours.service';
 
-export class ParcoursController {
+export class ParcoursController implements ParcoursControllerInterface {
   constructor(private readonly parcoursService: ParcoursService) {}
 
   public async getAllParcours(req: Request, res: Response): Promise<void> {
