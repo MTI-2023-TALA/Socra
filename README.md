@@ -1,6 +1,7 @@
 # Socra
 
 School project made by 4 student at EPITA:
+
 - Alois Heloir
 - Alan Schaeffer
 - Theo Casner
@@ -8,15 +9,16 @@ School project made by 4 student at EPITA:
 
 ## How to install
 
-Install the dependencie
+Install the dependencies
 
 ```
 npm ci
 ```
 
 To enable the database you can use
+
 ```
-docker compose up -d mongo
+docker-compose up -d mongo
 ```
 
 ## Run the program
