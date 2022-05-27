@@ -4,8 +4,11 @@
   "description": "",
   "main": "src/app.ts",
   "scripts": {
-    "start": "npx tsc && node build/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src/app.ts",
+    "build": "tsc --project ./tsconfig.json",
+    "test": "jest -c ./jest.config.ts",
+    "test:watch": "jest -c ./jest.config.ts --watchAll",
+    "test:coverage": "jest -c ./jest.config.ts --coverage"
   },
   "repository": {
     "type": "git",
@@ -20,11 +23,16 @@
   "homepage": "https://github.com/MTI-2023-TALA/Socra#readme",
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/jest": "^27.5.1",
     "@types/node": "^17.0.35",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
     "eslint": "^8.16.0",
     "express": "^4.18.1",
+    "jest": "^28.1.0",
+    "nodemon": "^2.0.16",
+    "ts-jest": "^28.0.3",
+    "ts-node": "^10.8.0",
     "typescript": "^4.7.2"
   }
 }
