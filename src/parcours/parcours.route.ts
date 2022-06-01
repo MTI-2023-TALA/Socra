@@ -10,5 +10,10 @@ export class ParcoursRoute {
     app.post('/parcours', async (req, res) => {
       await parcoursController.addParcours(req, res);
     });
+
+    app.patch('/parcours/:id', async (req, res) => {
+      const id = req.params.id;
+      await parcoursController.updateParcours(id, req, res);
+    });
   }
 }

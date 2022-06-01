@@ -1,8 +1,9 @@
-import { Document, WithId } from 'mongodb';
+import { Document, ObjectId, UpdateResult, WithId } from 'mongodb';
 
 import { CreateParcoursDto } from '../dto/create-parcours.dto';
 import { ParcoursDto } from '../dto/parcours.dto';
 import { ParcoursRepositoryInterface } from './interfaces/parcours.repository.interface';
+import { UpdateParcoursDto } from '../dto/update-parcours.dto';
 import { parcoursCollection } from '../mongo';
 
 export class ParcoursRepository implements ParcoursRepositoryInterface {
@@ -18,5 +19,14 @@ export class ParcoursRepository implements ParcoursRepositoryInterface {
       createdAt: createdAt,
       ...createParcoursDto,
     };
+  }
+
+  public async updateParcours(id: string, updateParcoursDto: UpdateParcoursDto): Promise<UpdateResult> {
+    return await parcoursCollection.updateOne(
+      {
+        _id: new ObjectId(id),
+      },
+      { $set: updateParcoursDto }
+    );
   }
 }

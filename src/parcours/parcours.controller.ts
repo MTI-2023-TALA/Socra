@@ -16,4 +16,9 @@ export class ParcoursController implements ParcoursControllerInterface {
     const insertResult = await this.parcoursService.addParcours(req.body);
     res.send(insertResult);
   }
+
+  public async updateParcours(id: string, req: Request, res: Response): Promise<void> {
+    const updatedParcours = await this.parcoursService.updateParcours(id, req.body);
+    res.send(updatedParcours);
+  }
 }
