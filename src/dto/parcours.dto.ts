@@ -8,6 +8,8 @@ export class ParcoursDto {
   onSitePercentage!: number;
   beginDate!: Date;
   modules!: ModulesDto[];
+  description!: string;
+  createdAt!: Date;
 }
 
 class ModulesDto {

@@ -12,6 +12,7 @@ export class ParcoursController implements ParcoursControllerInterface {
   }
 
   public async addParcours(req: Request, res: Response): Promise<void> {
+    // TODO: verify what is sent in body and if attributes are correct
     const insertResult = await this.parcoursService.addParcours(req.body);
     res.send(insertResult);
   }

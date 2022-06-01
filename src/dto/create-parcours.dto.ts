@@ -35,6 +35,10 @@ export class CreateParcoursDto {
 
   @IsNotEmpty()
   modules!: CreateModulesDto[];
+
+  @IsNotEmpty()
+  @IsString()
+  description!: string;
 }
 
 class CreateModulesDto {
