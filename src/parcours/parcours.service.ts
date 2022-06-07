@@ -2,7 +2,6 @@ import { Document, UpdateResult, WithId } from 'mongodb';
 
 import { CreateParcoursDto } from '../dto/create-parcours.dto';
 import { ParcoursDto } from '../dto/parcours.dto';
-import { ParcoursRepository } from './parcours.repository';
 import { ParcoursRepositoryInterface } from './interfaces/parcours.repository.interface';
 import { ParcoursServiceInterface } from './interfaces/parcours.service.interface';
 import { UpdateParcoursDto } from '../dto/update-parcours.dto';
