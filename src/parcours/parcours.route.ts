@@ -7,6 +7,10 @@ export class ParcoursRoute {
       await parcoursController.getAllParcours(req, res);
     });
 
+    app.get('/parcours/:id', async (req, res) => {
+      await parcoursController.getParcoursById(req, res);
+    });
+
     app.post('/parcours', async (req, res) => {
       await parcoursController.addParcours(req, res);
     });

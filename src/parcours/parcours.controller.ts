@@ -11,6 +11,14 @@ export class ParcoursController implements ParcoursControllerInterface {
     res.send(parcours);
   }
 
+  public async getParcoursById(req: Request, res: Response): Promise<void> {
+    const parcours = await this.parcoursService.getParcoursById(req.params.id);
+    if (!parcours) {
+      res.status(404).send('Parcours not found');
+    }
+    res.send(parcours);
+  }
+
   public async addParcours(req: Request, res: Response): Promise<void> {
     // TODO: verify what is sent in body and if attributes are correct
     const insertResult = await this.parcoursService.addParcours(req.body);
