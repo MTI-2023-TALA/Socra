@@ -11,6 +11,10 @@ export class ParcoursRepository implements ParcoursRepositoryInterface {
     return await parcoursCollection.find({}).sort({ createdAt: -1 }).toArray();
   }
 
+  public async getParcoursById(id: string): Promise<WithId<Document> | null> {
+    return parcoursCollection.findOne({ _id: new ObjectId(id) });
+  }
+
   public async addParcours(createParcoursDto: CreateParcoursDto): Promise<ParcoursDto> {
     const createdAt = new Date(Date.now());
     const insertResult = await parcoursCollection.insertOne({ ...createParcoursDto, createdAt });
