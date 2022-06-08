@@ -15,6 +15,7 @@ export class ParcoursController implements ParcoursControllerInterface {
     const parcours = await this.parcoursService.getParcoursById(req.params.id);
     if (!parcours) {
       res.status(404).send('Parcours not found');
+      return;
     }
     res.send(parcours);
   }
