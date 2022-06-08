@@ -21,6 +21,13 @@ To enable the database you can use
 docker-compose up -d mongo
 ```
 
+To run the test,
+You need to have the mongo test database
+
+```
+docker-compose up -d mongo-test
+```
+
 ## Run the program
 
 ```
