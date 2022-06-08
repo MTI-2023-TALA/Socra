@@ -4,11 +4,41 @@ import { CreateParcoursDto } from '../dto/create-parcours.dto';
 import { ParcoursRepositoryInterface } from './interfaces/parcours.repository.interface';
 import { ParcoursService } from './parcours.service';
 import { UpdateParcoursDto } from '../dto/update-parcours.dto';
+import { serialize } from 'v8';
+
+const newParocurs: CreateParcoursDto = {
+  title: 'STAPS',
+  campus: 'Toulouse',
+  durationInMonths: 24,
+  type: 'Master',
+  price: 0,
+  onSitePercentage: 100,
+  beginDate: new Date('2023-03-05'),
+  modules: [
+    {
+      title: 'Badminton',
+      description: 'Cours de Badminton',
+    },
+    {
+      title: 'Tennis',
+      description: 'Cours de tennis',
+    },
+    {
+      title: "Coach Sportif 1'O'1",
+      description: 'Comment devenir un bon coach sportif',
+    },
+    {
+      title: 'Management',
+      description: 'Bases du management',
+    },
+  ],
+  description: 'Master pour devenir Coach sportif ou athlète de haut-niveau',
+};
 
 class ParcoursRepositoryMock implements ParcoursRepositoryInterface {
   parcours: WithId<Document>[] = [
     {
-      _id: new ObjectId('4edd40c86762e0fb12000003'),
+      _id: new ObjectId('4edd40c86762e0fb12000000'),
       title: 'Génie Logiciel',
       createdAt: new Date('2020-01-01T00:00:00.000Z'),
       campus: 'Paris',
@@ -31,7 +61,7 @@ class ParcoursRepositoryMock implements ParcoursRepositoryInterface {
         'Un master dédié à l’étude des systèmes d’information ainsi que leur implémentation dans les entreprises',
     },
     {
-      _id: new ObjectId('4edd40c86762e0fb12000004'),
+      _id: new ObjectId('4edd40c86762e0fb12000001'),
       createdAt: new Date('2020-01-01T00:00:00.000Z'),
       title: 'Agronomie',
       campus: 'Strasbourg',
@@ -67,11 +97,30 @@ class ParcoursRepositoryMock implements ParcoursRepositoryInterface {
   }
 
   async addParcours(createParcoursDto: CreateParcoursDto): Promise<InsertOneResult> {
-    throw new Error('Method not implemented.');
+    this.parcours.push({
+      _id: new ObjectId('4edd40c86762e0fb1200000' + this.parcours.length),
+      createParcoursDto,
+      createdAt: new Date(Date.now()),
+    });
+
+    return { acknowledged: true, insertedId: this.parcours[this.parcours.length - 1]._id };
   }
 
   async updateParcours(id: string, updateParcoursDto: UpdateParcoursDto): Promise<UpdateResult> {
-    throw new Error('Method not implemented.');
+    const p = this.parcours.find((parcours) => parcours._id.toString() === id);
+    if (!p) {
+      throw new Error('Parcours not found');
+    }
+
+    p.description = updateParcoursDto.description;
+
+    return {
+      acknowledged: true,
+      matchedCount: 1,
+      modifiedCount: 1,
+      upsertedId: p._id,
+      upsertedCount: 1,
+    };
   }
 }
 
@@ -111,5 +160,34 @@ describe('ParcoursService', () => {
     const res = await service.getParcoursById('4edd40c86762e0fb12000005');
     expect(res).toBeNull();
     expect(getParcoursById).toHaveBeenCalledTimes(1);
+  });
+
+  it('should be able to add new parcours', async () => {
+    const addParcours = jest.spyOn(repository, 'addParcours');
+    const res = (await service.addParcours(newParocurs)) as any;
+
+    delete res.createdAt;
+    expect(res).toMatchSnapshot();
+    expect(addParcours).toBeCalledTimes(1);
+  });
+
+  it('should be able to getAllParcours when you have added one parcours', async () => {
+    const getAllParcours = jest.spyOn(repository, 'getAllParcours');
+    await service.addParcours(newParocurs);
+
+    const res = await service.getAllParcours();
+    expect(getAllParcours).toBeCalledTimes(1);
+    expect(res).toHaveLength(3);
+  });
+
+  it('Should be able to update Description of a parours', async () => {
+    const updateParcours = jest.spyOn(repository, 'updateParcours');
+
+    await service.updateParcours('4edd40c86762e0fb12000000', {
+      description: 'Bonjour',
+    });
+
+    expect((await service.getAllParcours())[0].description).toEqual('Bonjour');
+    expect(updateParcours).toBeCalledTimes(1);
   });
 });

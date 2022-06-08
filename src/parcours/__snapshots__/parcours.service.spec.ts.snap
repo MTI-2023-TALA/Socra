@@ -1,5 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ParcoursService should be able to add new parcours 1`] = `
+Object {
+  "beginDate": 2023-03-05T00:00:00.000Z,
+  "campus": "Toulouse",
+  "description": "Master pour devenir Coach sportif ou athlète de haut-niveau",
+  "durationInMonths": 24,
+  "id": "4edd40c86762e0fb12000002",
+  "modules": Array [
+    Object {
+      "description": "Cours de Badminton",
+      "title": "Badminton",
+    },
+    Object {
+      "description": "Cours de tennis",
+      "title": "Tennis",
+    },
+    Object {
+      "description": "Comment devenir un bon coach sportif",
+      "title": "Coach Sportif 1'O'1",
+    },
+    Object {
+      "description": "Bases du management",
+      "title": "Management",
+    },
+  ],
+  "onSitePercentage": 100,
+  "price": 0,
+  "title": "STAPS",
+  "type": "Master",
+}
+`;
+
 exports[`ParcoursService should call getAllParcours 1`] = `
 Array [
   Object {
@@ -8,7 +40,7 @@ Array [
     "createdAt": 2020-01-01T00:00:00.000Z,
     "description": "Un master dédié à l’étude des systèmes d’information ainsi que leur implémentation dans les entreprises",
     "durationInMonths": 24,
-    "id": "4edd40c86762e0fb12000003",
+    "id": "4edd40c86762e0fb12000000",
     "modules": Array [
       Object {
         "description": "Autour de la gestion d'information",
@@ -30,7 +62,7 @@ Array [
     "createdAt": 2020-01-01T00:00:00.000Z,
     "description": "Un master dédié à devenir un bon agriculteur!",
     "durationInMonths": 24,
-    "id": "4edd40c86762e0fb12000004",
+    "id": "4edd40c86762e0fb12000001",
     "modules": Array [
       Object {
         "description": "Apprentissage: Comment traire une vache comme un pro",
@@ -49,27 +81,4 @@ Array [
 ]
 `;
 
-exports[`ParcoursService should call getParcoursById 1`] = `
-Object {
-  "beginDate": 2023-02-25T00:00:00.000Z,
-  "campus": "Paris",
-  "createdAt": 2020-01-01T00:00:00.000Z,
-  "description": "Un master dédié à l’étude des systèmes d’information ainsi que leur implémentation dans les entreprises",
-  "durationInMonths": 24,
-  "id": "4edd40c86762e0fb12000003",
-  "modules": Array [
-    Object {
-      "description": "Autour de la gestion d'information",
-      "title": "Systèmes d'information",
-    },
-    Object {
-      "description": "Préparation Certification SAP",
-      "titre": "ERP",
-    },
-  ],
-  "onSitePercentage": 50,
-  "price": 12000,
-  "title": "Génie Logiciel",
-  "type": "Master",
-}
-`;
+exports[`ParcoursService should call getParcoursById 1`] = `null`;
