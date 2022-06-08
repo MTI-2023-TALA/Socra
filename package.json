@@ -39,7 +39,9 @@
   },
   "dependencies": {
     "class-validator": "^0.13.2",
+    "express-generator": "^4.16.1",
     "mongodb": "^4.6.0",
-    "mongoose": "^6.3.4"
+    "mongoose": "^6.3.4",
+    "pdfkit": "^0.13.0"
   }
 }

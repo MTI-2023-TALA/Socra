@@ -1,10 +1,15 @@
 import { Request, Response } from 'express';
 
+import { ParamsDictionary } from 'express-serve-static-core';
 import { ParcoursControllerInterface } from './interfaces/parcours.controller.interface';
 import { ParcoursServiceInterface } from './interfaces/parcours.service.interface';
+import { ParsedQs } from 'qs';
 
 export class ParcoursController implements ParcoursControllerInterface {
   constructor(private readonly parcoursService: ParcoursServiceInterface) {}
+  getParcoursPdf(req: Request, res: Response): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
 
   public async getAllParcours(req: Request, res: Response): Promise<void> {
     const parcours = await this.parcoursService.getAllParcours();
@@ -26,7 +31,8 @@ export class ParcoursController implements ParcoursControllerInterface {
     res.send(insertResult);
   }
 
-  public async updateParcours(id: string, req: Request, res: Response): Promise<void> {
+  public async updateParcours(req: Request, res: Response): Promise<void> {
+    const id = req.params.id;
     const updatedParcours = await this.parcoursService.updateParcours(id, req.body);
     res.send(updatedParcours);
   }

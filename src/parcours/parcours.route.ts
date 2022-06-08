@@ -16,8 +16,11 @@ export class ParcoursRoute {
     });
 
     app.patch('/parcours/:id', async (req, res) => {
-      const id = req.params.id;
-      await parcoursController.updateParcours(id, req, res);
+      await parcoursController.updateParcours(req, res);
+    });
+
+    app.get('/parcours/pdf/:id', async (req, res) => {
+      await parcoursController.getParcoursPdf(req, res);
     });
   }
 }
