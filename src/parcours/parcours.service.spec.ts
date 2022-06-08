@@ -1,7 +1,6 @@
-import { Document, ObjectId, UpdateResult, WithId } from 'mongodb';
+import { Document, InsertOneResult, ObjectId, UpdateResult, WithId } from 'mongodb';
 
 import { CreateParcoursDto } from '../dto/create-parcours.dto';
-import { ParcoursDto } from '../dto/parcours.dto';
 import { ParcoursRepositoryInterface } from './interfaces/parcours.repository.interface';
 import { ParcoursService } from './parcours.service';
 import { UpdateParcoursDto } from '../dto/update-parcours.dto';
@@ -11,6 +10,7 @@ class ParcoursRepositoryMock implements ParcoursRepositoryInterface {
     {
       _id: new ObjectId('4edd40c86762e0fb12000003'),
       title: 'Génie Logiciel',
+      createdAt: new Date('2020-01-01T00:00:00.000Z'),
       campus: 'Paris',
       durationInMonths: 24,
       type: 'Master',
@@ -32,6 +32,7 @@ class ParcoursRepositoryMock implements ParcoursRepositoryInterface {
     },
     {
       _id: new ObjectId('4edd40c86762e0fb12000004'),
+      createdAt: new Date('2020-01-01T00:00:00.000Z'),
       title: 'Agronomie',
       campus: 'Strasbourg',
       durationInMonths: 24,
@@ -65,7 +66,7 @@ class ParcoursRepositoryMock implements ParcoursRepositoryInterface {
     return p;
   }
 
-  async addParcours(createParcoursDto: CreateParcoursDto): Promise<ParcoursDto> {
+  async addParcours(createParcoursDto: CreateParcoursDto): Promise<InsertOneResult> {
     throw new Error('Method not implemented.');
   }
 
@@ -92,7 +93,7 @@ describe('ParcoursService', () => {
     const getAllParcours = jest.spyOn(repository, 'getAllParcours');
 
     const res = await service.getAllParcours();
-    expect(res).toEqual(repository.parcours);
+    expect(res).toMatchSnapshot();
     expect(getAllParcours).toHaveBeenCalledTimes(1);
   });
 
@@ -100,7 +101,7 @@ describe('ParcoursService', () => {
     const getParcoursById = jest.spyOn(repository, 'getParcoursById');
 
     const res = await service.getParcoursById('4edd40c86762e0fb12000003');
-    expect(res).toEqual(repository.parcours[0]);
+    expect(res).toMatchSnapshot();
     expect(getParcoursById).toHaveBeenCalledTimes(1);
   });
 
