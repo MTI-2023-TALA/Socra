@@ -18,7 +18,12 @@ export class ParcoursService implements ParcoursServiceInterface {
   }
 
   public async addParcours(createParcoursDto: CreateParcoursDto): Promise<ParcoursDto> {
-    return this.parcoursRepository.addParcours(createParcoursDto);
+    const insertResult = await this.parcoursRepository.addParcours(createParcoursDto);
+    return {
+      id: insertResult.insertedId.toString(),
+      createdAt: new Date(Date.now()),
+      ...createParcoursDto,
+    };
   }
 
   public async updateParcours(id: string, updateParcoursDto: UpdateParcoursDto): Promise<UpdateResult> {
