@@ -9,6 +9,7 @@ export async function dropCollections() {
 }
 
 export async function connectToDatabase(connectionUrl: string): Promise<MongoClient> {
+  console.log(`Trying to connect to MongoDb using ${connectionUrl}`);
   const mongoClient = new MongoClient(connectionUrl);
   await mongoClient.connect();
   console.log('Connected successfully to server');
