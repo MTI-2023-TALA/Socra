@@ -1,7 +1,6 @@
-import { Document, ObjectId, UpdateResult, WithId } from 'mongodb';
+import { Document, InsertOneResult, ObjectId, UpdateResult, WithId } from 'mongodb';
 
 import { CreateParcoursDto } from '../dto/create-parcours.dto';
-import { ParcoursDto } from '../dto/parcours.dto';
 import { ParcoursRepositoryInterface } from './interfaces/parcours.repository.interface';
 import { UpdateParcoursDto } from '../dto/update-parcours.dto';
 import { parcoursCollection } from '../mongo';
@@ -11,14 +10,13 @@ export class ParcoursRepository implements ParcoursRepositoryInterface {
     return await parcoursCollection.find({}).sort({ createdAt: -1 }).toArray();
   }
 
-  public async addParcours(createParcoursDto: CreateParcoursDto): Promise<ParcoursDto> {
+  public async getParcoursById(id: string): Promise<WithId<Document> | null> {
+    return parcoursCollection.findOne({ _id: new ObjectId(id) });
+  }
+
+  public async addParcours(createParcoursDto: CreateParcoursDto): Promise<InsertOneResult> {
     const createdAt = new Date(Date.now());
-    const insertResult = await parcoursCollection.insertOne({ ...createParcoursDto, createdAt });
-    return {
-      id: insertResult.insertedId.toString(),
-      createdAt: createdAt,
-      ...createParcoursDto,
-    };
+    return await parcoursCollection.insertOne({ ...createParcoursDto, createdAt });
   }
 
   public async updateParcours(id: string, updateParcoursDto: UpdateParcoursDto): Promise<UpdateResult> {

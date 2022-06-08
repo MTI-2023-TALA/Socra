@@ -1,11 +1,19 @@
-import { Collection, MongoClient } from 'mongodb';
+import { Collection, Db, MongoClient } from 'mongodb';
 
-const mongoClient = new MongoClient('mongodb://localhost:27017');
 export let parcoursCollection: Collection;
 
-export async function connectToDatabase(): Promise<void> {
+let db: Db;
+
+export async function dropCollections() {
+  await db.dropDatabase();
+}
+
+export async function connectToDatabase(connectionUrl: string): Promise<MongoClient> {
+  console.log(`Trying to connect to MongoDb using ${connectionUrl}`);
+  const mongoClient = new MongoClient(connectionUrl);
   await mongoClient.connect();
   console.log('Connected successfully to server');
-  const db = mongoClient.db('mongo');
+  db = mongoClient.db('mongo');
   parcoursCollection = db.collection('parcours');
+  return mongoClient;
 }
