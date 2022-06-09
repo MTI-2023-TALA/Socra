@@ -154,7 +154,7 @@ describe('ParcoursService', () => {
   });
 
   it('should call getParcoursByKeywords', async () => {
-    const getParcoursByKeywords = jest.spyOn(service, 'getParcoursByKeywords');
+    const getParcoursByKeywords = jest.spyOn(repository, 'getAllParcours');
 
     const res = await service.getParcoursByKeywords([]);
     expect(res).toMatchSnapshot();
@@ -199,7 +199,7 @@ describe('ParcoursService', () => {
   });
 
   it('Should be able to sort by keywords', async () => {
-    const updateParcours = jest.spyOn(service, 'getParcoursByKeywords');
+    const updateParcours = jest.spyOn(repository, 'getAllParcours');
 
     expect((await service.getParcoursByKeywords(['agriculteur']))[0].title).toEqual('Agronomie');
     expect(updateParcours).toBeCalledTimes(1);
