@@ -11,7 +11,6 @@ export class KeywordSearcher {
     keywords.forEach((keyword) => {
       const occurencesOfKeyword = this.getOccurencesOfAKeyword(keyword, text);
       if (occurencesOfKeyword > 0) {
-        console.log(occurences);
         keywordFound += 1;
         occurences += occurencesOfKeyword;
       }
