@@ -15,14 +15,19 @@ Install the dependencies
 npm ci
 ```
 
-To enable the database you can use
+To enable the database with already data in it, you can use
+
+```
+docker-compose up -d mongo-seed
+```
+
+Otherwise, to enable an empty database you can use
 
 ```
 docker-compose up -d mongo
 ```
 
-To run the test,
-You need to have the mongo test database
+To run tests, you need to have the mongo test database
 
 ```
 docker-compose up -d mongo-test
