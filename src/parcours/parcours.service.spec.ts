@@ -4,7 +4,6 @@ import { CreateParcoursDto } from '../dto/create-parcours.dto';
 import { ParcoursRepositoryInterface } from './interfaces/parcours.repository.interface';
 import { ParcoursService } from './parcours.service';
 import { UpdateParcoursDto } from '../dto/update-parcours.dto';
-import { serialize } from 'v8';
 
 const newParocurs: CreateParcoursDto = {
   title: 'STAPS',
@@ -154,6 +153,14 @@ describe('ParcoursService', () => {
     expect(getParcoursById).toHaveBeenCalledTimes(1);
   });
 
+  it('should call getParcoursByKeywords', async () => {
+    const getParcoursByKeywords = jest.spyOn(repository, 'getAllParcours');
+
+    const res = await service.getParcoursByKeywords([]);
+    expect(res).toMatchSnapshot();
+    expect(getParcoursByKeywords).toHaveBeenCalledTimes(1);
+  });
+
   it('should fail to retrieve one parcours by non-existing id', async () => {
     const getParcoursById = jest.spyOn(repository, 'getParcoursById');
 
@@ -188,6 +195,13 @@ describe('ParcoursService', () => {
     });
 
     expect((await service.getAllParcours())[0].description).toEqual('Bonjour');
+    expect(updateParcours).toBeCalledTimes(1);
+  });
+
+  it('Should be able to sort by keywords', async () => {
+    const updateParcours = jest.spyOn(repository, 'getAllParcours');
+
+    expect((await service.getParcoursByKeywords(['agriculteur']))[0].title).toEqual('Agronomie');
     expect(updateParcours).toBeCalledTimes(1);
   });
 });

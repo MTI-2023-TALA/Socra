@@ -1,7 +1,6 @@
 import { Document, InsertOneResult, UpdateResult, WithId } from 'mongodb';
 
 import { CreateParcoursDto } from '../../dto/create-parcours.dto';
-import { ParcoursDto } from '../../dto/parcours.dto';
 import { UpdateParcoursDto } from '../../dto/update-parcours.dto';
 
 export interface ParcoursRepositoryInterface {

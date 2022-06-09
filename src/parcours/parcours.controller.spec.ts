@@ -26,6 +26,8 @@ const parcourExemple1 = {
     'Un master dédié à l’étude des systèmes d’information ainsi que leur implémentation dans les entreprises',
 };
 
+const keywordsExemple = ['entreprises'];
+
 describe('ParcoursController', () => {
   let client: MongoClient;
   let idParcour1: string;
@@ -42,6 +44,12 @@ describe('ParcoursController', () => {
 
   it('should be able to get all parcours', async () => {
     const res = await request(app).get('/parcours');
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toEqual([]);
+  });
+
+  it('should be able to get all parcours by keywords', async () => {
+    const res = await request(app).get('/search').send(keywordsExemple);
     expect(res.statusCode).toBe(200);
     expect(res.body).toEqual([]);
   });

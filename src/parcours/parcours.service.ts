@@ -1,6 +1,7 @@
 import { Document, UpdateResult, WithId } from 'mongodb';
 
 import { CreateParcoursDto } from '../dto/create-parcours.dto';
+import { KeywordSearcher } from '../keyword-search/keyword-search';
 import { ParcoursDto } from '../dto/parcours.dto';
 import { ParcoursRepositoryInterface } from './interfaces/parcours.repository.interface';
 import { ParcoursServiceInterface } from './interfaces/parcours.service.interface';
@@ -8,6 +9,18 @@ import { UpdateParcoursDto } from '../dto/update-parcours.dto';
 
 export class ParcoursService implements ParcoursServiceInterface {
   constructor(private readonly parcoursRepository: ParcoursRepositoryInterface) {}
+
+  public async getParcoursByKeywords(keywords: string[]): Promise<ParcoursDto[]> {
+    const parcours = await this.parcoursRepository.getAllParcours();
+    const keywordSearcher = new KeywordSearcher();
+    parcours.sort((a, b) => {
+      const scoreA = keywordSearcher.getScore(keywords, a['description']);
+      const scoreB = keywordSearcher.getScore(keywords, b['description']);
+      if (scoreA > scoreB) return -1;
+      return 1;
+    });
+    return parcours.map((parcour: WithId<Document>) => this.mapDocumentToParcourDto(parcour));
+  }
 
   public async getAllParcours(): Promise<ParcoursDto[]> {
     const parcours = await this.parcoursRepository.getAllParcours();

@@ -7,6 +7,11 @@ import { ParsedQs } from 'qs';
 
 export class ParcoursController implements ParcoursControllerInterface {
   constructor(private readonly parcoursService: ParcoursServiceInterface) {}
+
+  public async getParcoursByKeywords(req: Request, res: Response): Promise<void> {
+    const parcours = await this.parcoursService.getParcoursByKeywords(req.body);
+    res.send(parcours);
+  }
   getParcoursPdf(req: Request, res: Response): Promise<void> {
     throw new Error('Method not implemented.');
   }
