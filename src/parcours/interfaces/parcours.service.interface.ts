@@ -6,6 +6,7 @@ import { UpdateResult } from 'mongodb';
 export interface ParcoursServiceInterface {
   getAllParcours(): Promise<ParcoursDto[]>;
   getParcoursById(id: string): Promise<ParcoursDto | null>;
+  getParcoursByKeywords(keywords: string[]): Promise<ParcoursDto[] | null>;
   addParcours(createParcoursDto: CreateParcoursDto): Promise<ParcoursDto>;
   updateParcours(id: string, updateParcoursDto: UpdateParcoursDto): Promise<UpdateResult>;
 }
