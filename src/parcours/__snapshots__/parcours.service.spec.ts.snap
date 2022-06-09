@@ -82,3 +82,52 @@ Array [
 `;
 
 exports[`ParcoursService should call getParcoursById 1`] = `null`;
+
+exports[`ParcoursService should call getParcoursByKeywords 1`] = `
+Array [
+  Object {
+    "beginDate": 2023-02-25T00:00:00.000Z,
+    "campus": "Paris",
+    "createdAt": 2020-01-01T00:00:00.000Z,
+    "description": "Un master dédié à l’étude des systèmes d’information ainsi que leur implémentation dans les entreprises",
+    "durationInMonths": 24,
+    "id": "4edd40c86762e0fb12000000",
+    "modules": Array [
+      Object {
+        "description": "Autour de la gestion d'information",
+        "title": "Systèmes d'information",
+      },
+      Object {
+        "description": "Préparation Certification SAP",
+        "titre": "ERP",
+      },
+    ],
+    "onSitePercentage": 50,
+    "price": 12000,
+    "title": "Génie Logiciel",
+    "type": "Master",
+  },
+  Object {
+    "beginDate": 2023-01-01T00:00:00.000Z,
+    "campus": "Strasbourg",
+    "createdAt": 2020-01-01T00:00:00.000Z,
+    "description": "Un master dédié à devenir un bon agriculteur!",
+    "durationInMonths": 24,
+    "id": "4edd40c86762e0fb12000001",
+    "modules": Array [
+      Object {
+        "description": "Apprentissage: Comment traire une vache comme un pro",
+        "title": "Trait des vaches",
+      },
+      Object {
+        "description": "Apprentissage: Combat à la fourche",
+        "titre": "FOURCHE",
+      },
+    ],
+    "onSitePercentage": 100,
+    "price": 1000,
+    "title": "Agronomie",
+    "type": "DUT",
+  },
+]
+`;
