@@ -39,3 +39,18 @@ npm run start
 ```
 npm run test
 ```
+
+## How to use
+
+In ordre to use the keyword search functionnality, ypu need to:
+
+- GET on localhost:3000/search
+- The body must respect the following format:
+
+```
+[
+    "keyword1",
+    ... ,
+    "keywordN",
+]
+```
