@@ -1,5 +1,6 @@
 version: '3'
 services:
+
   api:
     build: .
     ports:
@@ -10,12 +11,19 @@ services:
       - URL_MONGO=mongodb://mongo
     links:
       - mongo
+
   mongo:
     image: mongo
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+
+  mongo-seed:
+    build: ./mongo-seed
+    depends_on:
+      - mongo
+
   mongo-test:
     image: mongo
     ports:

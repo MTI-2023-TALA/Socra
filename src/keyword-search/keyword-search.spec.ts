@@ -1,5 +1,4 @@
 import { KeywordSearcher } from './keyword-search';
-import { deepStrictEqual } from 'assert';
 
 const keywords = ['java', 'api', 'architecture'];
 

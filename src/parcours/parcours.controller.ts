@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
 
-import { ParamsDictionary } from 'express-serve-static-core';
 import { ParcoursControllerInterface } from './interfaces/parcours.controller.interface';
 import { ParcoursServiceInterface } from './interfaces/parcours.service.interface';
-import { ParsedQs } from 'qs';
 
 export class ParcoursController implements ParcoursControllerInterface {
   constructor(private readonly parcoursService: ParcoursServiceInterface) {}
