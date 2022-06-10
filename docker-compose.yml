@@ -14,15 +14,14 @@ services:
 
   mongo:
     image: mongo
+    container_name: mongo-db
     ports:
       - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=mongo
     volumes:
       - mongo-data:/data/db
-
-  mongo-seed:
-    build: ./mongo-seed
-    depends_on:
-      - mongo
+      - ./mongo-seed/mongo-seed.js:/docker-entrypoint-initdb.d/mongo-seed.js
 
   mongo-test:
     image: mongo
