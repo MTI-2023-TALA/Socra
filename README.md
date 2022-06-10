@@ -98,16 +98,18 @@ When wanting to POST, the body must respect the following format:
 
 In order to use the keyword search functionnality, you need to:
 
-- GET /search
+- GET on /search
 - The body must respect the following format:
 
-```
+```json
 [
     "keyword1",
     ... ,
     "keywordN",
 ]
 ```
+
+This will retrieve all the parcours, sorted after a given formula.
 
 ## For the dev
 
