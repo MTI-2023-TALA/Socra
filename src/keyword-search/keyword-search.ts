@@ -1,4 +1,6 @@
 export class KeywordSearcher {
+  private factor = 0.5;
+
   /**
    *
    * @param keywords The keywords to look for
@@ -26,7 +28,7 @@ export class KeywordSearcher {
    * @returns The score, calculated after the function in the subject
    */
   calculateScore(keywordFound: number, numberOfKeyword: number, occurences: number): number {
-    return keywordFound * occurences - 0.5 * numberOfKeyword * occurences;
+    return keywordFound * occurences - this.factor * numberOfKeyword * occurences;
   }
 
   /**
