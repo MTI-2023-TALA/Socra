@@ -29,6 +29,7 @@ services:
       - "27018:27017"
     volumes:
       - mongo-data:/data/db-test
+      - ./mongo-seed/mongo-test-seed.js:/docker-entrypoint-initdb.d/mongo-test-seed.js
 
 volumes:
   mongo-data:
