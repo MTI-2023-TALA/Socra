@@ -95,6 +95,13 @@ class ParcoursRepositoryMock implements ParcoursRepositoryInterface {
     return p;
   }
 
+  async getParcoursByKeywords(keywords: string[]): Promise<WithId<Document>[]> {
+    return this.parcours.filter((p) => {
+      const regex = new RegExp('\\b(' + keywords.join('|') + ')\\b', 'g');
+      return regex.test(p.description);
+    });
+  }
+
   async addParcours(createParcoursDto: CreateParcoursDto): Promise<InsertOneResult> {
     this.parcours.push({
       _id: new ObjectId('4edd40c86762e0fb1200000' + this.parcours.length),
@@ -154,7 +161,7 @@ describe('ParcoursService', () => {
   });
 
   it('should call getParcoursByKeywords', async () => {
-    const getParcoursByKeywords = jest.spyOn(repository, 'getAllParcours');
+    const getParcoursByKeywords = jest.spyOn(repository, 'getParcoursByKeywords');
 
     const res = await service.getParcoursByKeywords([]);
     expect(res).toMatchSnapshot();
@@ -199,7 +206,7 @@ describe('ParcoursService', () => {
   });
 
   it('Should be able to sort by keywords', async () => {
-    const updateParcours = jest.spyOn(repository, 'getAllParcours');
+    const updateParcours = jest.spyOn(repository, 'getParcoursByKeywords');
 
     expect((await service.getParcoursByKeywords(['agriculteur']))[0].title).toEqual('Agronomie');
     expect(updateParcours).toBeCalledTimes(1);
