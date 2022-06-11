@@ -9,6 +9,10 @@ import { UpdateParcoursDto } from '../dto/update-parcours.dto';
 
 export class ParcoursService implements ParcoursServiceInterface {
   constructor(private readonly parcoursRepository: ParcoursRepositoryInterface) {}
+  public async getParcoursCheaperThan(price: number): Promise<ParcoursDto[]> {
+    const parcours = await this.parcoursRepository.getParcoursCheaperThan(price);
+    return parcours.map((parcour: WithId<Document>) => this.mapDocumentToParcourDto(parcour));
+  }
 
   public async getParcoursByKeywords(keywords: string[]): Promise<ParcoursDto[]> {
     const parcours = await this.parcoursRepository.getAllParcours();

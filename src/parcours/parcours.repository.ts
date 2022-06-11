@@ -6,6 +6,9 @@ import { UpdateParcoursDto } from '../dto/update-parcours.dto';
 import { parcoursCollection } from '../mongo';
 
 export class ParcoursRepository implements ParcoursRepositoryInterface {
+  public async getParcoursCheaperThan(price: number): Promise<WithId<Document>[]> {
+    return await parcoursCollection.find({ price: { $lte: price } }).toArray();
+  }
   public async getAllParcours(): Promise<WithId<Document>[]> {
     return await parcoursCollection.find({}).sort({ createdAt: -1 }).toArray();
   }
