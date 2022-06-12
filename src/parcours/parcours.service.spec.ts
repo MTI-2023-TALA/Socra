@@ -103,16 +103,16 @@ class ParcoursRepositoryMock implements ParcoursRepositoryInterface {
     return p;
   }
 
+  async getParcoursWithCity(city: string): Promise<WithId<Document>[]> {
+    const p = this.parcours.filter((parcours) => parcours.campus.toString().toLowerCase() === city.toLowerCase());
+    return p;
+  }
+
   async getParcoursByKeywords(keywords: string[]): Promise<WithId<Document>[]> {
     return this.parcours.filter((p) => {
       const regex = new RegExp('\\b(' + keywords.join('|') + ')\\b', 'g');
       return regex.test(p.description);
     });
-  }
-
-  async getParcoursWithCity(city: string): Promise<WithId<Document>[]> {
-    const p = this.parcours.filter((parcours) => parcours.campus.toString().toLowerCase() === city.toLowerCase());
-    return p;
   }
 
   async addParcours(createParcoursDto: CreateParcoursDto): Promise<InsertOneResult> {
