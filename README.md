@@ -94,6 +94,8 @@ When wanting to POST, the body must respect the following format:
 
 - /parcours/cheaper/{price} that get all the parcours where the price is lesser than or equal to the price given in the query
 
+- /parcours/city/{city} that get a parcours located in the given city. Note that the search is case insensitive.
+
 - /search explain just underneath
 
 ### Keyword search
