@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 
+import PDFDocument from 'pdfkit';
 import { ParcoursControllerInterface } from './interfaces/parcours.controller.interface';
 import { ParcoursServiceInterface } from './interfaces/parcours.service.interface';
 
@@ -37,7 +38,21 @@ export class ParcoursController implements ParcoursControllerInterface {
     res.send(updatedParcours);
   }
 
-  getParcoursPdf(req: Request, res: Response): Promise<void> {
-    throw new Error('Method not implemented.');
+  public async getParcoursPdf(req: Request, res: Response): Promise<void> {
+    const doc = new PDFDocument({ bufferPages: true });
+
+    const buffers: any[] = [];
+    doc.on('data', buffers.push.bind(buffers));
+    doc.on('end', () => {
+      const pdfData = Buffer.concat(buffers);
+      res
+        .writeHead(200, {
+          'Content-Length': Buffer.byteLength(pdfData as ArrayBuffer),
+          'Content-Type': 'application/pdf',
+          'Content-disposition': 'attachment;filename=test.pdf',
+        })
+        .end(pdfData);
+    });
+    await this.parcoursService.getParcoursPdf(req.params.id, doc);
   }
 }

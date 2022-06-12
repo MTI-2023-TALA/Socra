@@ -17,7 +17,7 @@ db.parcours.insertMany([
         description: "Autour de la gestion d'information",
       },
       {
-        titre: 'ERP',
+        title: 'ERP',
         description: 'Préparation Certification SAP',
       },
     ],
@@ -38,7 +38,7 @@ db.parcours.insertMany([
         description: 'Apprentissage: Comment traire une vache comme un pro',
       },
       {
-        titre: 'FOURCHE',
+        title: 'FOURCHE',
         description: 'Apprentissage: Combat à la fourche',
       },
     ],
@@ -58,7 +58,7 @@ db.parcours.insertMany([
         description: 'Apprendre le C pendant une piscine intense et fructueuse en connaissances',
       },
       {
-        titre: 'Mathématiques',
+        title: 'Mathématiques',
         description:
           "C'est important les mathématiques pour être un bon ingénieur: équations différentielles et tout le tralala",
       },
@@ -79,11 +79,11 @@ db.parcours.insertMany([
         description: 'Cours de marketing pour apprendre les bases',
       },
       {
-        titre: 'Pilotage financier',
+        title: 'Pilotage financier',
         description: 'Apprendre à faire un bilan et un compte de résultat',
       },
       {
-        titre: "Commerce 1'o'1",
+        title: "Commerce 1'o'1",
         description: 'Les fondements du commerce',
       },
     ],
@@ -103,15 +103,15 @@ db.parcours.insertMany([
         description: 'Cours de Badminton',
       },
       {
-        titre: 'Tennis',
+        title: 'Tennis',
         description: 'Cours de tennis',
       },
       {
-        titre: "Coach Sportif 1'O'1",
+        title: "Coach Sportif 1'O'1",
         description: 'Comment devenir un bon coach sportif',
       },
       {
-        titre: 'Management',
+        title: 'Management',
         description: 'Bases du management',
       },
     ],
@@ -131,7 +131,7 @@ db.parcours.insertMany([
         description: "Cours de culture générale et d'expression afin de bien communiquer",
       },
       {
-        titre: 'Anglais',
+        title: 'Anglais',
         description: 'Cours pour apprendre les termes professionnels utiles',
       },
     ],
@@ -151,7 +151,7 @@ db.parcours.insertMany([
         description: "Introduction à l'administration de réseaux locaux",
       },
       {
-        titre: 'Sciences physiques',
+        title: 'Sciences physiques',
         description: 'Découverte des composants électroniques et bien plus',
       },
     ],
@@ -172,11 +172,11 @@ db.parcours.insertMany([
         description: 'Bases du marketing pour apprendre les locations et bails',
       },
       {
-        titre: 'Management',
+        title: 'Management',
         description: 'Apprentissage managériale',
       },
       {
-        titre: 'Anglais',
+        title: 'Anglais',
         description: 'Cours pour apprendre les termes professionnels utiles',
       },
     ],
@@ -196,11 +196,11 @@ db.parcours.insertMany([
         description: "Modèle de l'atome, stéréochimie",
       },
       {
-        titre: 'Physique et biophysique',
+        title: 'Physique et biophysique',
         description: 'Mécanique des fluides et de phénomènes de transport de particules chargées',
       },
       {
-        titre: 'Sciences Humaines et Sociales et Santé publique',
+        title: 'Sciences Humaines et Sociales et Santé publique',
         description: 'population, espérance de vie à tel âge, pourcentage de fumeurs dans telle catégorie sociale',
       },
     ],
@@ -220,7 +220,7 @@ db.parcours.insertMany([
         description: 'HTML, CSS, JS',
       },
       {
-        titre: 'Design',
+        title: 'Design',
         description: 'Choix des couleurs, choix des typographies, comment mettre en forme un beau site web',
       },
     ],
