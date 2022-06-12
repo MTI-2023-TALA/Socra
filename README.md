@@ -92,6 +92,8 @@ When wanting to POST, the body must respect the following format:
 
 - /parcours/{id} that get a specific parcours. Note that if the id doesn't exist, an 404 Error will be raised
 
+- /parcours/cheaper/{price} that get all the parcours where the price is lesser than or equal to the price given in the query
+
 - /search explain just underneath
 
 ### Keyword search

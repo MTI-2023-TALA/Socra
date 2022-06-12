@@ -87,6 +87,14 @@ class ParcoursRepositoryMock implements ParcoursRepositoryInterface {
     return this.parcours;
   }
 
+  async getParcoursCheaperThan(price: number): Promise<WithId<Document>[]> {
+    const p = this.parcours.filter((parcours) => parcours.price <= price);
+    if (p === undefined) {
+      return [];
+    }
+    return p;
+  }
+
   async getParcoursById(id: string): Promise<WithId<Document> | null> {
     const p = this.parcours.find((parcours) => parcours._id.toString() === id);
     if (p === undefined) {
@@ -209,6 +217,13 @@ describe('ParcoursService', () => {
     const updateParcours = jest.spyOn(repository, 'getParcoursByKeywords');
 
     expect((await service.getParcoursByKeywords(['agriculteur']))[0].title).toEqual('Agronomie');
-    expect(updateParcours).toBeCalledTimes(1);
+    expect(getAllParcours).toBeCalledTimes(1);
+  });
+
+  it('Should be able to get cheaper parcours', async () => {
+    const getParcoursCheaperThan = jest.spyOn(repository, 'getParcoursCheaperThan');
+
+    expect((await service.getParcoursCheaperThan(10000))[0].title).toEqual('Agronomie');
+    expect(getParcoursCheaperThan).toBeCalledTimes(1);
   });
 });
