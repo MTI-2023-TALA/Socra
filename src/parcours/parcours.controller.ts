@@ -9,6 +9,7 @@ export class ParcoursController implements ParcoursControllerInterface {
 
   public async getParcoursCheaperThan(req: Request, res: Response): Promise<void> {
     const parcours = await this.parcoursService.getParcoursCheaperThan(+req.params.price);
+    res.send(parcours);
   }
 
   public async getParcoursWithCity(req: Request, res: Response): Promise<void> {

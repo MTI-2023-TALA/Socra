@@ -85,8 +85,7 @@ describe('ParcoursController', () => {
   it('should be able to remove parcours to pricy', async () => {
     const res = await request(app).get('/parcours/cheaper/10000');
     expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveLength(1);
-    expect(res.body[0].title).toEqual(parcourExemple1.title);
+    expect(res.body).toHaveLength(0);
   });
 
   it('should be able to get a parcours with the good city', async () => {
