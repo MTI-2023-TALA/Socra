@@ -15,17 +15,13 @@ First of all, to install the dependencies
 npm ci
 ```
 
-To enable the database with already some data in it, you can use
-
-```
-docker-compose up -d mongo-seed
-```
-
-Otherwise, to enable an empty database you can use
+Then, to enable an empty database
 
 ```
 docker-compose up -d mongo
 ```
+
+The first time the database is created, it will be seed with 10 different parcours.
 
 ## Run the program
 
@@ -47,7 +43,7 @@ Then, you can execute the tests
 npm run test
 ```
 
-**_Note that all the tests are run by the CI on pull requests_**
+**_Note that all the tests are run by the CI on push_**
 
 ## How to use
 
@@ -113,7 +109,7 @@ In order to use the keyword search functionnality, you need to:
 ]
 ```
 
-This will retrieve all the parcours, sorted after a given formula.
+This will retrieve all the parcours, sorted after a given formula. Note that the parcours in which none of the keyword are found will not be retrieved.
 
 ## For the dev
 
@@ -122,3 +118,5 @@ If you're ask to continue this project, here's a few tips for you.
 - The architecture of the project is a basic architecture. You can add route in the parcours.route.ts file, and add every function in the interface so that the testing is easier.
 
 - For the keyword search part, the class is self-sufficient, you can easily change it and it will affect the search part.
+
+- When pushing, the CI will run all the tests to ensure that there is no regression, as well as a lint verification and a build. We can only advise you to install a pre-commit hook (husky for example) to check that even before the push.
