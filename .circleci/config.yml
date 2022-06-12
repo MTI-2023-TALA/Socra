@@ -12,3 +12,5 @@ jobs:
             docker-compose up -d mongo-test
             npm install
             npm run test
+            npm run lint
+            npm run build

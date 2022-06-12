@@ -11,7 +11,18 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
-    indent: ['error', 2],
+    indent: 'off',
+    '@typescript-eslint/indent': [
+      'error',
+      2,
+      {
+        ignoredNodes: [
+          'FunctionExpression > .params[decorators.length > 0]',
+          'FunctionExpression > .params > :matches(Decorator, :not(:first-child))',
+          'ClassBody.body > PropertyDefinition[decorators.length > 0] > .key',
+        ],
+      },
+    ],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
     semi: ['error', 'always'],
