@@ -217,7 +217,7 @@ describe('ParcoursService', () => {
     const updateParcours = jest.spyOn(repository, 'getParcoursByKeywords');
 
     expect((await service.getParcoursByKeywords(['agriculteur']))[0].title).toEqual('Agronomie');
-    expect(getAllParcours).toBeCalledTimes(1);
+    expect(updateParcours).toBeCalledTimes(1);
   });
 
   it('Should be able to get cheaper parcours', async () => {
