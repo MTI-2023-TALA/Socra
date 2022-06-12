@@ -103,6 +103,11 @@ class ParcoursRepositoryMock implements ParcoursRepositoryInterface {
     return p;
   }
 
+  async getParcoursWithCity(city: string): Promise<WithId<Document>[]> {
+    const p = this.parcours.filter((parcours) => parcours.campus.toString().toLowerCase() === city.toLowerCase());
+    return p;
+  }
+
   async getParcoursByKeywords(keywords: string[]): Promise<WithId<Document>[]> {
     return this.parcours.filter((p) => {
       const regex = new RegExp('\\b(' + keywords.join('|') + ')\\b', 'g');
@@ -225,5 +230,12 @@ describe('ParcoursService', () => {
 
     expect((await service.getParcoursCheaperThan(10000))[0].title).toEqual('Agronomie');
     expect(getParcoursCheaperThan).toBeCalledTimes(1);
+  });
+
+  it('Should be able to get with city', async () => {
+    const updateParcours = jest.spyOn(repository, 'getParcoursWithCity');
+
+    expect((await service.getParcoursWithCity('StRaSbOuRg'))[0].title).toEqual('Agronomie');
+    expect(updateParcours).toBeCalledTimes(1);
   });
 });

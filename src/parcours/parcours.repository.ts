@@ -9,6 +9,11 @@ export class ParcoursRepository implements ParcoursRepositoryInterface {
   public async getParcoursCheaperThan(price: number): Promise<WithId<Document>[]> {
     return await parcoursCollection.find({ price: { $lte: price } }).toArray();
   }
+  public async getParcoursWithCity(city: string): Promise<WithId<Document>[]> {
+    const regex = new RegExp(['^', city, '$'].join(''), 'i');
+    return await parcoursCollection.find({ campus: regex }).toArray();
+  }
+
   public async getAllParcours(): Promise<WithId<Document>[]> {
     return await parcoursCollection.find({}).sort({ createdAt: -1 }).toArray();
   }

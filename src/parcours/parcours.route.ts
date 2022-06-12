@@ -15,6 +15,10 @@ export class ParcoursRoute {
       await parcoursController.getParcoursCheaperThan(req, res);
     });
 
+    app.get('/parcours/city/:city', async (req, res) => {
+      await parcoursController.getParcoursWithCity(req, res);
+    });
+
     app.get('/search', async (req, res) => {
       await parcoursController.getParcoursByKeywords(req, res);
     });
