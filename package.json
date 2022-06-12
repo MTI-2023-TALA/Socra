@@ -6,9 +6,9 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "build": "tsc --project ./tsconfig.json",
-    "test": "jest -c ./jest.config.ts",
-    "test:watch": "jest -c ./jest.config.ts --watchAll",
-    "test:coverage": "jest -c ./jest.config.ts --coverage"
+    "test": "jest -c ./jest.config.js",
+    "test:watch": "jest -c ./jest.config.js --watchAll",
+    "test:coverage": "jest -c ./jest.config.js --coverage"
   },
   "repository": {
     "type": "git",
