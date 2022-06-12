@@ -10,15 +10,7 @@ export class ParcoursController implements ParcoursControllerInterface {
     const parcours = await this.parcoursService.getParcoursWithCity(req.params.city);
     res.send(parcours);
   }
-
-  public async getParcoursByKeywords(req: Request, res: Response): Promise<void> {
-    const parcours = await this.parcoursService.getParcoursByKeywords(req.body);
-    res.send(parcours);
-  }
-  getParcoursPdf(req: Request, res: Response): Promise<void> {
-    throw new Error('Method not implemented.');
-  }
-
+  
   public async getAllParcours(req: Request, res: Response): Promise<void> {
     const parcours = await this.parcoursService.getAllParcours();
     res.send(parcours);
@@ -33,6 +25,11 @@ export class ParcoursController implements ParcoursControllerInterface {
     res.send(parcours);
   }
 
+  public async getParcoursByKeywords(req: Request, res: Response): Promise<void> {
+    const parcours = await this.parcoursService.getParcoursByKeywords(req.body);
+    res.send(parcours);
+  }
+
   public async addParcours(req: Request, res: Response): Promise<void> {
     // TODO: verify what is sent in body and if attributes are correct
     const insertResult = await this.parcoursService.addParcours(req.body);
@@ -43,5 +40,9 @@ export class ParcoursController implements ParcoursControllerInterface {
     const id = req.params.id;
     const updatedParcours = await this.parcoursService.updateParcours(id, req.body);
     res.send(updatedParcours);
+  }
+
+  getParcoursPdf(req: Request, res: Response): Promise<void> {
+    throw new Error('Method not implemented.');
   }
 }

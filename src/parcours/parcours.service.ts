@@ -15,30 +15,29 @@ export class ParcoursService implements ParcoursServiceInterface {
     return parcours.map((parcour: WithId<Document>) => this.mapDocumentToParcourDto(parcour));
   }
 
+  public async getAllParcours(): Promise<ParcoursDto[]> {
+    const parcoursList = await this.parcoursRepository.getAllParcours();
+    return parcoursList.map((parcours: WithId<Document>) => this.mapDocumentToParcoursDto(parcours));
+  }
+
+  public async getParcoursById(id: string): Promise<ParcoursDto | null> {
+    const parcours = await this.parcoursRepository.getParcoursById(id);
+    if (!parcours) {
+      return null;
+    }
+    return this.mapDocumentToParcoursDto(parcours);
+  }
+
   public async getParcoursByKeywords(keywords: string[]): Promise<ParcoursDto[]> {
-    const parcours = await this.parcoursRepository.getAllParcours();
+    const parcoursList = await this.parcoursRepository.getParcoursByKeywords(keywords);
     const keywordSearcher = new KeywordSearcher();
-    parcours.sort((a, b) => {
+    parcoursList.sort((a, b) => {
       const scoreA = keywordSearcher.getScore(keywords, a['description']);
       const scoreB = keywordSearcher.getScore(keywords, b['description']);
       if (scoreA > scoreB) return -1;
       return 1;
     });
-    return parcours.map((parcour: WithId<Document>) => this.mapDocumentToParcourDto(parcour));
-  }
-
-  public async getAllParcours(): Promise<ParcoursDto[]> {
-    const parcours = await this.parcoursRepository.getAllParcours();
-    return parcours.map((parcour: WithId<Document>) => this.mapDocumentToParcourDto(parcour));
-  }
-
-  public async getParcoursById(id: string): Promise<ParcoursDto | null> {
-    const parcour = await this.parcoursRepository.getParcoursById(id);
-    if (!parcour) {
-      return null;
-    }
-
-    return this.mapDocumentToParcourDto(parcour);
+    return parcoursList.map((parcours: WithId<Document>) => this.mapDocumentToParcoursDto(parcours));
   }
 
   public async addParcours(createParcoursDto: CreateParcoursDto): Promise<ParcoursDto> {
@@ -54,19 +53,19 @@ export class ParcoursService implements ParcoursServiceInterface {
     return this.parcoursRepository.updateParcours(id, updateParcoursDto);
   }
 
-  private mapDocumentToParcourDto(parcour: WithId<Document>): ParcoursDto {
+  private mapDocumentToParcoursDto(parcours: WithId<Document>): ParcoursDto {
     return {
-      id: parcour._id.toString(),
-      createdAt: new Date(parcour.createdAt),
-      title: parcour.title,
-      campus: parcour.campus,
-      durationInMonths: parcour.durationInMonths,
-      type: parcour.type,
-      price: parcour.price,
-      onSitePercentage: parcour.onSitePercentage,
-      beginDate: new Date(parcour.beginDate),
-      modules: parcour.modules,
-      description: parcour.description,
+      id: parcours._id.toString(),
+      createdAt: new Date(parcours.createdAt),
+      title: parcours.title,
+      campus: parcours.campus,
+      durationInMonths: parcours.durationInMonths,
+      type: parcours.type,
+      price: parcours.price,
+      onSitePercentage: parcours.onSitePercentage,
+      beginDate: new Date(parcours.beginDate),
+      modules: parcours.modules,
+      description: parcours.description,
     };
   }
 }
