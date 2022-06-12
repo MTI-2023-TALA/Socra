@@ -8,6 +8,7 @@ export interface ParcoursRepositoryInterface {
   getParcoursById(id: string): Promise<WithId<Document> | null>;
   getParcoursCheaperThan(price: number): Promise<WithId<Document>[]>;
   getParcoursByKeywords(keywords: string[]): Promise<WithId<Document>[]>;
+  getParcoursWithCity(city: string): Promise<WithId<Document>[]>;
   addParcours(createParcoursDto: CreateParcoursDto): Promise<InsertOneResult>;
   updateParcours(id: string, updateParcoursDto: UpdateParcoursDto): Promise<UpdateResult>;
 }
