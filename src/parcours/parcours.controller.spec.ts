@@ -33,7 +33,7 @@ describe('ParcoursController', () => {
   let idParcour1: string;
 
   beforeAll(async () => {
-    client = await connectToDatabase('mongodb://localhost:27018');
+    client = await connectToDatabase('mongodb://localhost:27018', 'test');
     await dropCollections();
   });
 
