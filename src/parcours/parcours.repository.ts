@@ -17,6 +17,10 @@ export class ParcoursRepository implements ParcoursRepositoryInterface {
     return parcoursCollection.findOne({ _id: new ObjectId(id) });
   }
 
+  public async getParcoursByKeywords(keywords: string[]): Promise<WithId<Document>[]> {
+    return parcoursCollection.find({ $text: { $search: keywords.join(' ') } }).toArray();
+  }
+
   public async addParcours(createParcoursDto: CreateParcoursDto): Promise<InsertOneResult> {
     const createdAt = new Date(Date.now());
     return await parcoursCollection.insertOne({ ...createParcoursDto, createdAt });
