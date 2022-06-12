@@ -6,6 +6,11 @@ import { ParcoursServiceInterface } from './interfaces/parcours.service.interfac
 export class ParcoursController implements ParcoursControllerInterface {
   constructor(private readonly parcoursService: ParcoursServiceInterface) {}
 
+  public async getParcoursWithCity(req: Request, res: Response): Promise<void> {
+    const parcours = await this.parcoursService.getParcoursWithCity(req.params.city);
+    res.send(parcours);
+  }
+
   public async getParcoursByKeywords(req: Request, res: Response): Promise<void> {
     const parcours = await this.parcoursService.getParcoursByKeywords(req.body);
     res.send(parcours);

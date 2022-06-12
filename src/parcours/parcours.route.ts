@@ -11,6 +11,10 @@ export class ParcoursRoute {
       await parcoursController.getParcoursById(req, res);
     });
 
+    app.get('/parcours/city/:city', async (req, res) => {
+      await parcoursController.getParcoursWithCity(req, res);
+    });
+
     app.get('/search', async (req, res) => {
       await parcoursController.getParcoursByKeywords(req, res);
     });
