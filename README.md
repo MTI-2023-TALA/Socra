@@ -15,13 +15,13 @@ First of all, to install the dependencies
 npm ci
 ```
 
-Then, to enable an empty database
+Then, to enable the database
 
 ```
 docker-compose up -d mongo
 ```
 
-The first time the database is created, it will be seed with 10 different parcours.
+The first time the database is created, it will be seeded with 10 different parcours.
 
 ## Run the program
 
