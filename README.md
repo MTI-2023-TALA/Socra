@@ -92,6 +92,8 @@ When wanting to POST, the body must respect the following format:
 
 - /parcours/{id} that get a specific parcours. Note that if the id doesn't exist, an 404 Error will be raised
 
+- /parcours/city/{city} that get a parcours located in the given city. Note that the search is case insensitive.
+
 - /search explain just underneath
 
 ### Keyword search
